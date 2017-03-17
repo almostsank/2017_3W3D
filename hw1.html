@@ -1,0 +1,208 @@
+<html>
+<head>
+  <script src='https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.0/jquery.min.js'>
+  </script>
+  <script>
+    function Light(name, toggleClass) {
+      Light.serial = Light.serial == undefined ? 0 : Light.serial;
+      this.name = name || "f" + Light.serial++;
+      var status = false;
+      var className = '.' + toggleClass;
+      var style = getComputedStyle(document.querySelector(className));
+      var originColor = style.backgroundColor;
+      $(className).css('backgroundColor', 'hsl(0, 0%, 95%)');
+
+      this.toggle = function() {
+        status = !status;
+        if (status) {
+          $(className).css('backgroundColor', originColor);
+        } else {
+          $(className).css('backgroundColor', 'hsl(0, 0%, 95%)');
+        }
+      }
+      this.check = function() {
+        return status;
+      }
+    }
+    var lightName = ["lightr", "lighty", "lightg", "lightb", "lighto"];
+    var lightArray = {};
+    var itv;
+    var light = null;
+    var ln = 0;
+    var ln2 = 3;
+
+    $(document).ready(function() {
+      for(var i = 0; i < 5; i++) {
+      	lightArray[i] = new Light(lightName[i], lightName[i]);
+      }
+
+      $('#toggle_btn').click(function() {
+      	if(!light) {
+        	$('#toggle_btn').text("Toggle Off");
+        	lightArray[ln].toggle();
+          lightArray[ln2].toggle();
+        	light = setInterval(function(){
+          	lightArray[ln].toggle();
+            lightArray[ln2].toggle();
+            ln = (ln + 1) % 5;
+            ln2 = (ln + 3) % 5;
+            lightArray[ln].toggle();
+            lightArray[ln2].toggle();
+          }, 500);
+        }
+        else {
+        	$('#toggle_btn').text("Toggle On");
+        	clearInterval(light);
+        	light = null;
+          lightArray[ln].toggle();
+          lightArray[ln2].toggle();
+          ln = 0;
+          ln2 = 3;
+        }
+      });
+    });
+  </script>
+  <style>
+    div {
+      width:10px;
+      height:16px;
+      border-top-left-radius: 60% 95%;
+      border-top-right-radius: 60% 95%;
+      border-bottom-right-radius: 50% 25%;
+      border-bottom-left-radius: 50% 25%;
+    }
+    .lightr {
+      background-color: hsl(0, 100%, 67%);
+      transform:rotate(-20deg);
+    }
+
+    .lighty {
+      background-color: hsl(60, 100%, 68%);
+    }
+
+    .lightg {
+      background-color: hsl(110, 100%, 54%);
+      transform:rotate(-10deg);
+    }
+
+    .lightb {
+      background-color: hsl(218, 100%, 57%);
+      transform:rotate(20deg);
+    }
+
+    .lighto {
+      background-color: hsl(40, 100%, 69%);
+      transform:rotate(-30deg);
+    }
+  </style>
+</head>
+<body>
+<table>
+  <tr>
+    <td><div class="lightr"></div></td>
+    <td><div class="lighty"></div></td>
+    <td><div class="lightg"></div></td>
+    <td><div class="lightb"></div></td>
+    <td><div class="lighto"></div></td>
+    <td><div class="lightr"></div></td>
+    <td><div class="lighty"></div></td>
+    <td><div class="lightg"></div></td>
+    <td><div class="lightb"></div></td>
+    <td><div class="lighto"></div></td>
+    <td><div class="lightr"></div></td>
+    <td><div class="lighty"></div></td>
+    <td><div class="lightg"></div></td>
+    <td><div class="lightb"></div></td>
+    <td><div class="lighto"></div></td>
+  </tr>
+  <tr>
+    <td><div class="lighty"></div></td>
+    <td></td>
+    <td></td>
+    <td></td>
+    <td></td>
+    <td></td>
+    <td></td>
+    <td></td>
+    <td></td>
+    <td></td>
+    <td></td>
+    <td></td>
+    <td></td>
+    <td></td>
+    <td><div class="lightr"></div></td>
+  </tr>
+  <tr>
+    <td><div class="lightg"></div></td>
+    <td></td>
+    <td></td>
+    <td></td>
+    <td></td>
+    <td>M</td>
+    <td>e</td>
+    <td>r</td>
+    <td>r</td>
+    <td>y</td>
+    <td></td>
+    <td></td>
+    <td></td>
+    <td></td>
+    <td><div class="lighty"></div></td>
+  </tr>
+  <tr>
+    <td><div class="lightb"></div></td>
+    <td></td>
+    <td></td>
+    <td></td>
+    <td></td>
+    <td>X</td>
+    <td>m</td>
+    <td>a</td>
+    <td>s</td>
+    <td></td>
+    <td></td>
+    <td></td>
+    <td></td>
+    <td></td>
+    <td><div class="lightg"></div></td>
+  </tr>
+  <tr>
+    <td><div class="lighto"></div></td>
+    <td></td>
+    <td></td>
+    <td></td>
+    <td></td>
+    <td></td>
+    <td></td>
+    <td></td>
+    <td></td>
+    <td></td>
+    <td></td>
+    <td></td>
+    <td></td>
+    <td></td>
+    <td><div class="lightb"></div></td>
+  </tr>
+  <tr>
+    <td><div class="lightr"></div></td>
+    <td><div class="lighty"></div></td>
+    <td><div class="lightg"></div></td>
+    <td><div class="lightb"></div></td>
+    <td><div class="lighto"></div></td>
+    <td><div class="lightr"></div></td>
+    <td><div class="lighty"></div></td>
+    <td><div class="lightg"></div></td>
+    <td><div class="lightb"></div></td>
+    <td><div class="lighto"></div></td>
+    <td><div class="lightr"></div></td>
+    <td><div class="lighty"></div></td>
+    <td><div class="lightg"></div></td>
+    <td><div class="lightb"></div></td>
+    <td><div class="lighto"></div></td>
+  </tr>
+</table>
+<button id='toggle_btn'>
+Toggle On
+</button>
+</body>
+</html>
